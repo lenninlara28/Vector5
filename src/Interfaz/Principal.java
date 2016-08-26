@@ -5,6 +5,8 @@
  */
 package Interfaz;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hp 14
@@ -14,6 +16,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    double v[];
     public Principal() {
         initComponents();
     }
@@ -28,16 +31,17 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtLongitud = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        cmbOperacion = new javax.swing.JComboBox<>();
         cmbCrear = new javax.swing.JButton();
         cmbManual = new javax.swing.JButton();
         cmbAutomatico = new javax.swing.JButton();
         cmbMostrar = new javax.swing.JButton();
         cmbBorrar = new javax.swing.JButton();
-        cmbOperacion = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        txtLongitud = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtResultado = new javax.swing.JTextArea();
@@ -46,29 +50,38 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Longitud"));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        jLabel2.setText("Longitud");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
-        jPanel2.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 80, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 190, 80));
-
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        cmbOperacion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productoria De La Primera Mitad", "Sumatoria De La Segunda Mitad" }));
+        jPanel3.add(cmbOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 220, -1));
+
         cmbCrear.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cmbCrear.setText("Crear");
+        cmbCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCrearActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmbCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         cmbManual.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cmbManual.setText("Llenar Manual");
+        cmbManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbManualActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmbManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         cmbAutomatico.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cmbAutomatico.setText("Llenar Automatico");
+        cmbAutomatico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAutomaticoActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmbAutomatico, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 90, -1, -1));
 
         cmbMostrar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -79,11 +92,27 @@ public class Principal extends javax.swing.JFrame {
         cmbBorrar.setText("Borrar");
         jPanel3.add(cmbBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
-        cmbOperacion.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        cmbOperacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Productoria De La Primera Mitad", "Sumatoria De La Segunda Mitad" }));
-        jPanel3.add(cmbOperacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 220, -1));
-
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 250, 230));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel1.setText("Vector Par");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, -1, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Longitud"));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        jLabel2.setText("Longitud");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        txtLongitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLongitudKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 80, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 190, 80));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,6 +139,56 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
+        char c=evt.getKeyChar();
+         
+        if(!Character.isDigit(c)){
+            getToolkit().beep();
+            evt.consume();}
+    }//GEN-LAST:event_txtLongitudKeyTyped
+
+    private void cmbCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCrearActionPerformed
+       int longitud;
+        if(txtLongitud.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this,"Digite La Longitud","Error",JOptionPane.ERROR_MESSAGE);
+            txtLongitud.requestFocusInWindow();
+        }else if (Integer.parseInt(txtLongitud.getText().trim())==0) {
+            JOptionPane.showMessageDialog(this, "La longitud no puede ser cero", "Error", JOptionPane.ERROR_MESSAGE);
+            txtLongitud.requestFocusInWindow();
+             txtLongitud.selectAll();}
+      else if (Integer.parseInt(txtLongitud.getText().trim())%2!=0) {
+            JOptionPane.showMessageDialog(this, "La longitud Tiene Que Ser Par ", "Error", JOptionPane.ERROR_MESSAGE);
+            txtLongitud.requestFocusInWindow();
+             txtLongitud.selectAll();}
+          else{
+            longitud=Integer.parseInt(txtLongitud.getText().trim());
+            v=new double[longitud];
+            
+            JOptionPane.showMessageDialog(this, "Vector Creado Exitosamente");
+      }
+    }//GEN-LAST:event_cmbCrearActionPerformed
+
+    private void cmbManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbManualActionPerformed
+        double n;
+        for (int i=0;i<v.length;i++){
+            n= Double.parseDouble(JOptionPane.showInputDialog(this, "Digite el Elemento EN La Posicion "+i));
+            v[i]=n;
+        }
+        JOptionPane.showMessageDialog(this, "Vector Creado Exitosamente");
+    }//GEN-LAST:event_cmbManualActionPerformed
+
+    private void cmbAutomaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAutomaticoActionPerformed
+        double n;
+        for (int i = 0; i < v.length; i++) {
+         n= (int) (Math.random()*50+1);
+            v[i]=n;
+        }
+        for (int i = 0; i < v.length; i++) {
+                    txtResultado.append(v[i]+" \n ");
+                }
+        JOptionPane.showMessageDialog(this, "Vector Creado Exitosamente");
+    }//GEN-LAST:event_cmbAutomaticoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +232,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton cmbManual;
     private javax.swing.JButton cmbMostrar;
     private javax.swing.JComboBox<String> cmbOperacion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
