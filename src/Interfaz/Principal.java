@@ -86,10 +86,20 @@ public class Principal extends javax.swing.JFrame {
 
         cmbMostrar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cmbMostrar.setText("Mostrar");
+        cmbMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMostrarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmbMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         cmbBorrar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         cmbBorrar.setText("Borrar");
+        cmbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbBorrarActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmbBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 250, 230));
@@ -189,6 +199,34 @@ public class Principal extends javax.swing.JFrame {
                 }
         JOptionPane.showMessageDialog(this, "Vector Creado Exitosamente");
     }//GEN-LAST:event_cmbAutomaticoActionPerformed
+
+    private void cmbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMostrarActionPerformed
+        String sumatoria , Productoria;
+        double suma=0,prod=1;
+        int op;
+        op=cmbOperacion.getSelectedIndex();
+        switch(op){
+            case 0:
+                    for(int i=0; i< v.length/2;i++){
+                    prod=prod*v[i];}
+                    Productoria=String.valueOf(prod);
+                    txtResultado.append(Productoria+"\n");
+                    break;
+            case 1:
+                for (int i =(v.length/2); i < v.length; i++) {
+                    suma=suma+v[i];}
+                sumatoria=String.valueOf(suma);
+                    txtResultado.append(sumatoria+"\n");
+                break;
+        }
+    }//GEN-LAST:event_cmbMostrarActionPerformed
+
+    private void cmbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBorrarActionPerformed
+      txtLongitud.setText("");
+        txtResultado.setText("");
+        v=null;
+        txtLongitud.requestFocusInWindow();
+    }//GEN-LAST:event_cmbBorrarActionPerformed
 
     /**
      * @param args the command line arguments
